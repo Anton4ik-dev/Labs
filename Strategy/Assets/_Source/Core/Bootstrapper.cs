@@ -17,6 +17,8 @@ public class Bootstrapper : MonoBehaviour
     [SerializeField] private Color highlightColor;
 
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private float time;
 
     private PlayerController _playerController;
     private EnemyController _enemyController;
@@ -24,7 +26,7 @@ public class Bootstrapper : MonoBehaviour
     void Start()
     {
         _playerController = new PlayerController(playerAnimator);
-        _enemyController = new EnemyController(new Skeleton(skeletonAnimator, "Attack"), new Wizard(wizardAnimator, "Attack", bulletPrefab), new Neon(neonAnimator, "Attack"));
+        _enemyController = new EnemyController(new Skeleton(skeletonAnimator, "Attack"), new Wizard(wizardAnimator, "Attack", bulletPrefab, spawnPoint, time), new Neon(neonAnimator, "Attack"));
 
         new AttackTypeSwitcher(_playerController, _enemyController, highlightColor, attackButtonType1, attackButtonType2, attackButtonType3);
     }
@@ -36,5 +38,8 @@ public class Bootstrapper : MonoBehaviour
             _playerController.PerformAttack();
             _enemyController.Neon.DoAttack();
         }
+
+        if(_enemyController.Wizard.Animator.gameObject.activeSelf)
+            _enemyController.Wizard.DoAttack();
     }
 }
