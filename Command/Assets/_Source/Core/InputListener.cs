@@ -14,6 +14,10 @@ namespace Core
                 _commandInvoker.Execute(ClickType.LeftClick, _mainCamera.ScreenToWorldPoint(Input.mousePosition));
             else if (Input.GetMouseButtonDown(1))
                 _commandInvoker.Execute(ClickType.RightClick, _mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            else if (Input.GetMouseButtonDown(2))
+                _commandInvoker.Undo();
+            else if (Input.GetKeyDown(KeyCode.KeypadEnter))
+                _commandInvoker.ExecuteRightClickCommands();
         }
 
         public void Construct(Camera mainCamera, CommandInvoker commandInvoker)
