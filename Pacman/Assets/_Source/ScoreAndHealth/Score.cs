@@ -5,10 +5,10 @@ namespace MV
     public class Score
     {
         private ScoreAndHealthView _scoreAndHealthView;
-        private int _score;
         private int _scoreChangeAmount;
 
         public static Action OnScoreChange;
+        public static Action OnGameEnd;
 
         public Score(ScoreAndHealthView scoreAndHealthView, int scoreChangeAmount)
         {
@@ -20,17 +20,18 @@ namespace MV
         private void Bind()
         {
             OnScoreChange += ChangeScore;
+            OnGameEnd += Expose;
         }
 
-        private void Expose()
+        public void Expose()
         {
             OnScoreChange -= ChangeScore;
+            OnGameEnd -= Expose;
         }
 
         public void ChangeScore()
         {
-            _score += _scoreChangeAmount;
-            _scoreAndHealthView.UpdateScoreText(_score);
+            _scoreAndHealthView.UpdateScoreText(_scoreChangeAmount);
         }
     }
 }

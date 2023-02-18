@@ -8,6 +8,7 @@ namespace MV
         private int _health;
 
         public static Action OnHealthChange;
+        public static Action OnGameEnd;
 
         public Health(ScoreAndHealthView scoreAndHealthView, int health)
         {
@@ -19,11 +20,13 @@ namespace MV
         private void Bind()
         {
             OnHealthChange += ChangeHealth;
+            OnGameEnd += Expose;
         }
 
-        private void Expose()
+        public void Expose()
         {
             OnHealthChange -= ChangeHealth;
+            OnGameEnd -= Expose;
         }
 
         public void ChangeHealth()
