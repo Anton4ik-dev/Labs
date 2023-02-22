@@ -16,6 +16,9 @@ namespace Core
         [SerializeField] private int scoreChangeAmount;
         [SerializeField] private int health;
 
+        [Header("Other")]
+        [SerializeField] private AudioSource bonusSound;
+
         private CharacterMovement _characterMovement;
 
         private void Awake()
@@ -23,7 +26,7 @@ namespace Core
             _characterMovement = new CharacterMovement(characterRb, moveSpeed);
             inputListener.Construct(_characterMovement);
 
-            new Score(scoreAndHealthView, scoreChangeAmount);
+            new Score(scoreAndHealthView, bonusSound, scoreChangeAmount);
             new Health(scoreAndHealthView, health);
         }
     }

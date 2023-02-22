@@ -1,18 +1,21 @@
 using System;
+using UnityEngine;
 
 namespace MV
 {
     public class Score
     {
         private ScoreAndHealthView _scoreAndHealthView;
+        private AudioSource _bonusSound;
         private int _scoreChangeAmount;
 
         public static Action OnScoreChange;
         public static Action OnGameEnd;
 
-        public Score(ScoreAndHealthView scoreAndHealthView, int scoreChangeAmount)
+        public Score(ScoreAndHealthView scoreAndHealthView, AudioSource bonusSound, int scoreChangeAmount)
         {
             _scoreAndHealthView = scoreAndHealthView;
+            _bonusSound = bonusSound;
             _scoreChangeAmount = scoreChangeAmount;
             Bind();
         }
@@ -31,6 +34,7 @@ namespace MV
 
         public void ChangeScore()
         {
+            _bonusSound.Play();
             _scoreAndHealthView.UpdateScoreText(_scoreChangeAmount);
         }
     }
