@@ -15,13 +15,17 @@ public class CharacterTrigger : MonoBehaviour
         _bonusLayerNum = (int)Mathf.Log(bonusLayer.value, 2);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == _enemyLayerNum)
         {
             Health.OnHealthChange();
         }
-        else if (collision.gameObject.layer == _bonusLayerNum)
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == _bonusLayerNum)
         {
             Score.OnScoreChange();
             Destroy(collision.gameObject);
