@@ -14,11 +14,11 @@ namespace MV
         [SerializeField] private Image losePanel;
         [SerializeField] private Image winPanel;
 
-        public void UpdateScoreText(int score)
+        public void UpdateScoreText(int score, int bonusesCollected)
         {
-            scoreText.text = (int.Parse(scoreText.text) + score).ToString();
+            scoreText.text = score.ToString();
 
-            if(bonuses.Count * score == int.Parse(scoreText.text))
+            if(bonuses.Count == bonusesCollected)
             {
                 Time.timeScale = 0;
                 winPanel.gameObject.SetActive(true);

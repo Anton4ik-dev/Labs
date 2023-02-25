@@ -1,9 +1,9 @@
 ﻿namespace Enemies
 {
-    interface IObservable
+    public interface IObservable
     {
-        public void AddObserver(IObserver o);
-        public void RemoveObserver(IObserver o);
-        public void NotifyObservers();
+        void AddObserver(IObserver observer);
+        void RemoveObserver(IObserver observer);
+        void NotifyObservers(bool toActivate);
     }
 }
