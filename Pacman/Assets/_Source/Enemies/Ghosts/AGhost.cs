@@ -70,9 +70,14 @@ namespace Enemies
             {
                 isDamaged = true;
                 sprite.DOColor(damagedColor, .1f);
-                transform.position = spawnPosition.position;
+                Teleport();
                 Score.OnScoreChangeForEnemies(damagedEnemies);
             }
+        }
+
+        public void Teleport()
+        {
+            transform.position = spawnPosition.position;
         }
 
         protected abstract void MoveGhost();

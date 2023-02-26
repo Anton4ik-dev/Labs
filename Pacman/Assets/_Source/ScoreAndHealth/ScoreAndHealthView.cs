@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace MV
 
         public void UpdateHealthView(int healthRemain)
         {
-            health[healthRemain].gameObject.SetActive(false);
+            health[healthRemain].DOFade(0, 1.5f);
 
             if (healthRemain == 0)
             {

@@ -8,6 +8,7 @@ public class CharacterTrigger : MonoBehaviour, IObserver
     [SerializeField] private LayerMask bonusLayer;
     [SerializeField] private LayerMask bigBonusLayer;
     [SerializeField] private BonusObservable bonusObservable;
+    [SerializeField] private OnDamageAction onDamageAction;
 
     private int _enemyLayerNum;
     private int _bonusLayerNum;
@@ -29,7 +30,9 @@ public class CharacterTrigger : MonoBehaviour, IObserver
         if (collision.gameObject.layer == _enemyLayerNum)
         {
             if (!_isBonus)
-                Health.OnHealthChange();
+            {
+                onDamageAction.OnDamage();
+            }
             else
                 collision.gameObject.GetComponent<AGhost>().TakeDamage(++_damagedEnemies);
         }
