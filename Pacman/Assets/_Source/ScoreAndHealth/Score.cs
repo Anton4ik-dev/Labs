@@ -50,7 +50,7 @@ namespace MV
 
         public void ChangeScoreForEnemies(int enemies)
         {
-            _totalScore += (int)Math.Pow(_scoreChangeAmountForEnemy, enemies);
+            _totalScore += _scoreChangeAmountForEnemy * enemies;
             _scoreAndHealthView.UpdateScoreText(_totalScore, _collectedBonuses);
         }
     }

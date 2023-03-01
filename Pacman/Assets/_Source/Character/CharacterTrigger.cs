@@ -25,19 +25,6 @@ public class CharacterTrigger : MonoBehaviour, IObserver
         bonusObservable.AddObserver(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == _enemyLayerNum)
-        {
-            if (!_isBonus)
-            {
-                onDamageAction.OnDamage();
-            }
-            else
-                collision.gameObject.GetComponent<AGhost>().TakeDamage(++_damagedEnemies);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == _bonusLayerNum)
@@ -49,6 +36,15 @@ public class CharacterTrigger : MonoBehaviour, IObserver
         {
             bonusObservable.NotifyObservers(!_isBonus);
             Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.layer == _enemyLayerNum)
+        {
+            if (!_isBonus)
+            {
+                onDamageAction.OnDamage();
+            }
+            else
+                collision.gameObject.GetComponent<AGhost>().TakeDamage(++_damagedEnemies);
         }
     }
 
