@@ -31,8 +31,7 @@ namespace MV
 
         public void ChangeHealth()
         {
-            _health--;
-            _scoreAndHealthView.UpdateHealthView(_health);
+            _scoreAndHealthView.UpdateHealthView(--_health);
         }
     }
 }

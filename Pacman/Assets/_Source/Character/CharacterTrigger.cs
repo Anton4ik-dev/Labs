@@ -7,12 +7,14 @@ public class CharacterTrigger : MonoBehaviour, IObserver
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask bonusLayer;
     [SerializeField] private LayerMask bigBonusLayer;
+    [SerializeField] private LayerMask teleportLayer;
     [SerializeField] private BonusObservable bonusObservable;
     [SerializeField] private OnDamageAction onDamageAction;
 
     private int _enemyLayerNum;
     private int _bonusLayerNum;
     private int _bigBonusLayerNum;
+    private int _teleportLayerNum;
 
     private int _damagedEnemies;
     private bool _isBonus;
@@ -22,6 +24,7 @@ public class CharacterTrigger : MonoBehaviour, IObserver
         _enemyLayerNum = (int)Mathf.Log(enemyLayer.value, 2);
         _bonusLayerNum = (int)Mathf.Log(bonusLayer.value, 2);
         _bigBonusLayerNum = (int)Mathf.Log(bigBonusLayer.value, 2);
+        _teleportLayerNum = (int)Mathf.Log(teleportLayer.value, 2);
         bonusObservable.AddObserver(this);
     }
 
@@ -45,6 +48,10 @@ public class CharacterTrigger : MonoBehaviour, IObserver
             }
             else
                 collision.gameObject.GetComponent<AGhost>().TakeDamage(++_damagedEnemies);
+        }
+        else if(collision.gameObject.layer == _teleportLayerNum)
+        {
+            collision.gameObject.GetComponent<TeleportPoint>().Teleport(gameObject);
         }
     }
 

@@ -11,6 +11,7 @@ namespace Enemies
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private BonusObservable bonusObservable;
         [SerializeField] private LayerMask rotateTriggerLayer;
+        [SerializeField] private LayerMask teleportLayer;
 
         [Header("VisualSettings")]
         [SerializeField] private SpriteRenderer sprite;
@@ -24,11 +25,13 @@ namespace Enemies
         private bool isDamaged;
 
         private int _rotateTriggerNum;
+        private int _teleportLayerNum;
         private float remainTime;
 
         private void Start()
         {
             _rotateTriggerNum = (int)Mathf.Log(rotateTriggerLayer.value, 2);
+            _teleportLayerNum = (int)Mathf.Log(teleportLayer.value, 2);
             bonusObservable.AddObserver(this);
         }
 
@@ -53,6 +56,10 @@ namespace Enemies
             if (collision.gameObject.layer == _rotateTriggerNum)
             {
                 OnRotateTrigger(collision);
+            }
+            else if (collision.gameObject.layer == _teleportLayerNum)
+            {
+                collision.gameObject.GetComponent<TeleportPoint>().Teleport(gameObject);
             }
         }
 
