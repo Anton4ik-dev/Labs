@@ -11,6 +11,7 @@ namespace MV
     {
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private List<Image> health;
+        [SerializeField] private List<Image> specialIcons;
         [SerializeField] private List<GameObject> bonuses;
         [SerializeField] private Image losePanel;
         [SerializeField] private Image winPanel;
@@ -35,6 +36,11 @@ namespace MV
                 Time.timeScale = 0;
                 losePanel.gameObject.SetActive(true);
             }
+        }
+
+        public void UpdateSpecialIcons(int collectedSpecials)
+        {
+            specialIcons[collectedSpecials].gameObject.SetActive(true);
         }
 
         public void Restart()

@@ -10,19 +10,22 @@ namespace MV
 
         private int _scoreChangeAmount;
         private int _scoreChangeAmountForEnemy;
+        private int _scoreChangeAmountForSpecial;
         private int _totalScore;
         private int _collectedBonuses;
 
         public static Action OnScoreChange;
         public static Action<int> OnScoreChangeForEnemies;
+        public static Action<int> OnScoreChangeForSpecial;
         public static Action OnGameEnd;
 
-        public Score(ScoreAndHealthView scoreAndHealthView, AudioSource bonusSound, int scoreChangeAmount, int scoreChangeAmountForEnemy)
+        public Score(ScoreAndHealthView scoreAndHealthView, AudioSource bonusSound, int scoreChangeAmount, int scoreChangeAmountForEnemy, int scoreChangeAmountForSpecial)
         {
             _scoreAndHealthView = scoreAndHealthView;
             _bonusSound = bonusSound;
             _scoreChangeAmount = scoreChangeAmount;
             _scoreChangeAmountForEnemy = scoreChangeAmountForEnemy;
+            _scoreChangeAmountForSpecial = scoreChangeAmountForSpecial;
             Bind();
         }
 
@@ -30,6 +33,7 @@ namespace MV
         {
             OnScoreChange += ChangeScore;
             OnScoreChangeForEnemies += ChangeScoreForEnemies;
+            OnScoreChangeForSpecial += ChangeScoreForSpecial;
             OnGameEnd += Expose;
         }
 
@@ -37,6 +41,7 @@ namespace MV
         {
             OnScoreChange -= ChangeScore;
             OnScoreChangeForEnemies -= ChangeScoreForEnemies;
+            OnScoreChangeForSpecial -= ChangeScoreForSpecial;
             OnGameEnd -= Expose;
         }
 
@@ -52,6 +57,13 @@ namespace MV
         {
             _totalScore += _scoreChangeAmountForEnemy * enemies;
             _scoreAndHealthView.UpdateScoreText(_totalScore, _collectedBonuses);
+        }
+
+        public void ChangeScoreForSpecial(int collectedSpecials)
+        {
+            _totalScore += _scoreChangeAmountForSpecial;
+            _scoreAndHealthView.UpdateScoreText(_totalScore, _collectedBonuses);
+            _scoreAndHealthView.UpdateSpecialIcons(collectedSpecials);
         }
     }
 }

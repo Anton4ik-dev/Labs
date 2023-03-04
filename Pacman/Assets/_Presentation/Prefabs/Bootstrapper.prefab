@@ -49,4 +49,7 @@ MonoBehaviour:
   characterRb: {fileID: 0}
   scoreAndHealthView: {fileID: 0}
   scoreChangeAmount: 10
-  health: 3
+  scoreChangeAmountForEnemy: 100
+  scoreChangeAmountForSpecial: 50
+  health: 4
+  bonusSound: {fileID: 0}

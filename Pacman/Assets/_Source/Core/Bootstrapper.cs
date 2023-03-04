@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private ScoreAndHealthView scoreAndHealthView;
         [SerializeField] private int scoreChangeAmount;
         [SerializeField] private int scoreChangeAmountForEnemy;
+        [SerializeField] private int scoreChangeAmountForSpecial;
         [SerializeField] private int health;
 
         [Header("Other")]
@@ -27,7 +28,7 @@ namespace Core
             _characterMovement = new CharacterMovement(characterRb, moveSpeed);
             inputListener.Construct(_characterMovement);
 
-            new Score(scoreAndHealthView, bonusSound, scoreChangeAmount, scoreChangeAmountForEnemy);
+            new Score(scoreAndHealthView, bonusSound, scoreChangeAmount, scoreChangeAmountForEnemy, scoreChangeAmountForSpecial);
             new Health(scoreAndHealthView, health);
         }
     }
