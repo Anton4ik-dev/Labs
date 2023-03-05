@@ -11,11 +11,21 @@ public class OnDamageAction : MonoBehaviour
     [SerializeField] private InputListener input;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Transform playerPosition;
+    [SerializeField] private AudioSource loseSound;
+    [SerializeField] private AudioSource gameTheme;
     [SerializeField] private float pauseTime;
+
+    private Vector3 spawnPos;
+
+    private void Start()
+    {
+        spawnPos = playerPosition.position;
+    }
 
     public void OnDamage()
     {
-        //sound
+        gameTheme.Stop();
+        loseSound.Play();
         playerSprite.DOFade(0, pauseTime/2f).OnComplete(() => playerSprite.DOFade(1, pauseTime / 2f));
         Health.OnHealthChange();
         input.enabled = false;
@@ -44,6 +54,7 @@ public class OnDamageAction : MonoBehaviour
         }
 
         input.enabled = true;
-        playerSprite.gameObject.transform.position = playerPosition.position;
+        playerSprite.gameObject.transform.position = spawnPos;
+        gameTheme.Play();
     }
 }

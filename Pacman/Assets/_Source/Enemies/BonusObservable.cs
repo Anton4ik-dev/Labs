@@ -7,6 +7,9 @@ namespace Enemies
     public class BonusObservable : MonoBehaviour, IObservable
     {
         [SerializeField] private float duration;
+        [SerializeField] private AudioSource extraSound;
+        [SerializeField] private AudioSource gameTheme;
+        [SerializeField] private AudioSource bonusGameTheme;
 
         private List<IObserver> observers = new List<IObserver>();
 
@@ -28,7 +31,17 @@ namespace Enemies
             }
 
             if(toActivate)
+            {
+                gameTheme.Stop();
+                extraSound.Play();
+                bonusGameTheme.Play();
                 StartCoroutine(Countdown());
+            }
+            else
+            {
+                gameTheme.Play();
+                bonusGameTheme.Stop();
+            }
         }
 
         private IEnumerator Countdown()

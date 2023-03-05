@@ -49,7 +49,13 @@ public class CharacterTrigger : MonoBehaviour, IObserver
             specialBonus.CollectSpecial();
             collision.gameObject.SetActive(false);
         }
-        else if (collision.gameObject.layer == _enemyLayerNum)
+        else if(collision.gameObject.layer == _teleportLayerNum)
+            collision.gameObject.GetComponent<TeleportPoint>().Teleport(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == _enemyLayerNum)
         {
             if (!_isBonus)
             {
@@ -58,8 +64,6 @@ public class CharacterTrigger : MonoBehaviour, IObserver
             else
                 collision.gameObject.GetComponent<AGhost>().TakeDamage(++_damagedEnemies);
         }
-        else if(collision.gameObject.layer == _teleportLayerNum)
-            collision.gameObject.GetComponent<TeleportPoint>().Teleport(gameObject);
     }
 
     public void UpdateObserver(bool toActivate)
