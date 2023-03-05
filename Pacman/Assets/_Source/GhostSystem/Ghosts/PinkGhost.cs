@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies
+namespace GhostSystem
 {
     public class PinkGhost : AGhost
     {

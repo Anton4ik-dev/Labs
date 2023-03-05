@@ -1,16 +1,16 @@
 using UnityEngine;
 
-namespace Enemies
+namespace GhostSystem
 {
     public class RedGhost : PinkGhost
     {
         [SerializeField] private Transform pacmanTransform;
 
-        private bool isAgro;
+        private bool _isAgro;
 
         protected override void MoveGhost()
         {
-            if(!isAgro)
+            if(!_isAgro)
             {
                 if (_isMovingToPoint)
                     transform.position = Vector2.MoveTowards(transform.position, _pointToMoveFor, speed * Time.deltaTime);
@@ -26,7 +26,7 @@ namespace Enemies
 
         public void ChangeMode()
         {
-            isAgro = !isAgro;
+            _isAgro = !_isAgro;
         }
     }
 }

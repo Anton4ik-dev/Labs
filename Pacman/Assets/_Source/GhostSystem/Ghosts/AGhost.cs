@@ -1,20 +1,22 @@
+using Bonuses;
 using DG.Tweening;
 using MV;
 using UnityEngine;
 
-namespace Enemies
+namespace GhostSystem
 {
     public abstract class AGhost : MonoBehaviour, IObserver
     {
+        [Header("MechanicSettings")]
         [SerializeField] protected float speed;
-        [SerializeField] private float chillTime;
+        [SerializeField] private float afkTime;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private BonusObservable bonusObservable;
         [SerializeField] private LayerMask rotateTriggerLayer;
         [SerializeField] private LayerMask teleportLayer;
 
         [Header("VisualSettings")]
-        [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private SpriteRenderer ghostSprite;
         [SerializeField] private Color baseColor;
         [SerializeField] private Color onBonusColor;
         [SerializeField] private Color damagedColor;
@@ -22,11 +24,11 @@ namespace Enemies
         protected Vector2 _direction;
         protected Vector3 _pointToMoveFor;
         protected bool _isMovingToPoint;
-        private bool isDamaged;
+        private bool _isDamaged;
 
         private int _rotateTriggerNum;
         private int _teleportLayerNum;
-        private float remainTime;
+        private float _remainTime;
 
         private void Start()
         {
@@ -37,14 +39,14 @@ namespace Enemies
 
         private void Update()
         {
-            if(isDamaged)
+            if(_isDamaged)
             {
-                remainTime += Time.deltaTime;
-                if(remainTime >= chillTime)
+                _remainTime += Time.deltaTime;
+                if(_remainTime >= afkTime)
                 {
-                    remainTime = 0;
-                    sprite.DOColor(baseColor, .1f);
-                    isDamaged = false;
+                    _remainTime = 0;
+                    ghostSprite.DOColor(baseColor, .1f);
+                    _isDamaged = false;
                 }
             }
             else
@@ -66,17 +68,17 @@ namespace Enemies
         public void UpdateObserver(bool toActivate)
         {
             if(toActivate)
-                sprite.DOColor(onBonusColor, .1f);
-            else if (!isDamaged && !toActivate)
-                sprite.DOColor(baseColor, .1f);
+                ghostSprite.DOColor(onBonusColor, .1f);
+            else if (!_isDamaged && !toActivate)
+                ghostSprite.DOColor(baseColor, .1f);
         }
 
         public void TakeDamage(int damagedEnemies)
         {
-            if(!isDamaged)
+            if(!_isDamaged)
             {
-                isDamaged = true;
-                sprite.DOColor(damagedColor, .1f);
+                _isDamaged = true;
+                ghostSprite.DOColor(damagedColor, .1f);
                 Teleport();
                 Score.OnScoreChangeForEnemies(damagedEnemies);
             }

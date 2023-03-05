@@ -10651,7 +10651,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -10691,7 +10691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 541865595}
-  health:
+  healthIcons:
   - {fileID: 1693640080}
   - {fileID: 835785466}
   - {fileID: 646101195}
@@ -10701,7 +10701,7 @@ MonoBehaviour:
   - {fileID: 1848110763}
   - {fileID: 1598194128}
   - {fileID: 756898811}
-  bonuses:
+  allBonuses:
   - {fileID: 3149419349820073873}
   - {fileID: 1454196608}
   - {fileID: 966117596}
@@ -18160,6 +18160,10 @@ PrefabInstance:
       propertyPath: loseSound
       value: 
       objectReference: {fileID: 2079482620}
+    - target: {fileID: 4551433115246774273, guid: 85bfddcdb3f37fc4c8491b04c623d603, type: 3}
+      propertyPath: pauseTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4551433115246774273, guid: 85bfddcdb3f37fc4c8491b04c623d603, type: 3}
       propertyPath: playerSprite
       value: 

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  chillTime: 5
+  afkTime: 10
   spawnPosition: {fileID: 0}
   bonusObservable: {fileID: 0}
   rotateTriggerLayer:
@@ -156,7 +156,7 @@ MonoBehaviour:
   teleportLayer:
     serializedVersion: 2
     m_Bits: 1024
-  sprite: {fileID: 954171680993584998}
+  ghostSprite: {fileID: 954171680993584998}
   baseColor: {r: 1, g: 0.5803922, b: 0.9882353, a: 1}
   onBonusColor: {r: 0, g: 0.105348825, b: 1, a: 1}
   damagedColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}

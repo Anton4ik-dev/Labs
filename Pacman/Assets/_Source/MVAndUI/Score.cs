@@ -63,7 +63,7 @@ namespace MV
         {
             _totalScore += _scoreChangeAmountForSpecial;
             _scoreAndHealthView.UpdateScoreText(_totalScore, _collectedBonuses);
-            _scoreAndHealthView.UpdateSpecialIcons(collectedSpecials);
+            _scoreAndHealthView.UpdateSpecialIconsView(collectedSpecials);
         }
     }
 }

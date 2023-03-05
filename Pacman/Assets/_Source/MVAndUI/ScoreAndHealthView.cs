@@ -10,9 +10,9 @@ namespace MV
     public class ScoreAndHealthView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private List<Image> health;
+        [SerializeField] private List<Image> healthIcons;
         [SerializeField] private List<Image> specialIcons;
-        [SerializeField] private List<GameObject> bonuses;
+        [SerializeField] private List<GameObject> allBonuses;
         [SerializeField] private Image losePanel;
         [SerializeField] private Image winPanel;
 
@@ -20,7 +20,7 @@ namespace MV
         {
             scoreText.text = score.ToString();
 
-            if(bonuses.Count == bonusesCollected)
+            if(allBonuses.Count == bonusesCollected)
             {
                 Time.timeScale = 0;
                 winPanel.gameObject.SetActive(true);
@@ -29,7 +29,7 @@ namespace MV
 
         public void UpdateHealthView(int healthRemain)
         {
-            health[healthRemain].DOFade(0, 1.5f);
+            healthIcons[healthRemain].DOFade(0, 1.5f);
 
             if (healthRemain == 0)
             {
@@ -38,7 +38,7 @@ namespace MV
             }
         }
 
-        public void UpdateSpecialIcons(int collectedSpecials)
+        public void UpdateSpecialIconsView(int collectedSpecials)
         {
             specialIcons[collectedSpecials].gameObject.SetActive(true);
         }
