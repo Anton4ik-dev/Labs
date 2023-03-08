@@ -47,7 +47,8 @@ namespace MV
 
         public void ChangeScore()
         {
-            _bonusSound.Play();
+            if(!_bonusSound.isPlaying)
+                _bonusSound.Play();
             _totalScore += _scoreChangeAmount;
             _collectedBonuses++;
             _scoreAndHealthView.UpdateScoreText(_totalScore, _collectedBonuses);

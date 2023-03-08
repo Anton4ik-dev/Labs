@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputListener: {fileID: 0}
-  moveSpeed: 4
+  moveSpeed: 3.5
   characterRb: {fileID: 0}
   scoreAndHealthView: {fileID: 0}
   scoreChangeAmount: 10
