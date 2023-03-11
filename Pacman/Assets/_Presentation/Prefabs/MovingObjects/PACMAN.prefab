@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4292906988796662847}
   - component: {fileID: 4292906988796662845}
   - component: {fileID: 573792025}
-  - component: {fileID: 5173550079760362393}
+  - component: {fileID: 636122590283767260}
   m_Layer: 3
   m_Name: PACMAN
   m_TagString: Untagged
@@ -138,8 +138,8 @@ MonoBehaviour:
   bonusObservable: {fileID: 0}
   onDamageAction: {fileID: 0}
   specialBonus: {fileID: 0}
---- !u!61 &5173550079760362393
-BoxCollider2D:
+--- !u!58 &636122590283767260
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,15 +152,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
