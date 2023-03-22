@@ -5,13 +5,13 @@ public class UISwitcher
     public Dictionary<int, IUIController> states;
     private IUIController _activeState;
 
-    public UISwitcher(MainMenuView mainMenuView, AddMenuView addMenuView, RemoveMenuView removeMenuView, ResourcePool resourcePool)
+    public void Initialize(IUIController mainMenuState, IUIController addMenuState, IUIController removeMenuState)
     {
         states = new Dictionary<int, IUIController>();
 
-        states.Add(0, new MainMenuController(mainMenuView, resourcePool, this));
-        states.Add(1, new AddMenuController(addMenuView, resourcePool, this));
-        states.Add(2, new RemoveMenuController(removeMenuView, resourcePool, this));
+        states.Add(0, mainMenuState);
+        states.Add(1, addMenuState);
+        states.Add(2, removeMenuState);
     }
 
     private void ExitState()
