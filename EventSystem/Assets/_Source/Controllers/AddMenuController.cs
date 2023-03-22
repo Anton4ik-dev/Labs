@@ -1,3 +1,4 @@
+using deVoid.Utils;
 using System.Collections.Generic;
 
 public class AddMenuController : IUIController, IGameEventListener
@@ -5,11 +6,9 @@ public class AddMenuController : IUIController, IGameEventListener
     private AddMenuView _addMenuView;
     private ResourcePool _resourcePool;
 
-    private EventSO _eventSO;
-
     public UISwitcher UISwitcher { get; set; }
 
-    public AddMenuController(AddMenuView addMenuView, ResourcePool resourcePool, UISwitcher uiSwitcher, EventSO eventSO)
+    public AddMenuController(AddMenuView addMenuView, ResourcePool resourcePool, UISwitcher uiSwitcher)
     {
         _addMenuView = addMenuView;
         _resourcePool = resourcePool;
@@ -19,8 +18,7 @@ public class AddMenuController : IUIController, IGameEventListener
 
         _addMenuView.RemoveButton.onClick.AddListener(Add);
 
-        _eventSO = eventSO;
-        _eventSO.RegisterObserver(this);
+        Signals.Get<AddSignal>().AddListener(Notify);
 
         _addMenuView.DropDown.AddOptions(new List<string> { _resourcePool.Wood.ToString(), _resourcePool.Iron.ToString(), _resourcePool.Gold.ToString() });
     }
@@ -50,7 +48,7 @@ public class AddMenuController : IUIController, IGameEventListener
 
     private void Add()
     {
-        _eventSO.Notify();
+        Signals.Get<AddSignal>().Dispatch();
     }
 
     private void SetText()

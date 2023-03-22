@@ -1,6 +1,7 @@
+using deVoid.Utils;
 using UnityEngine;
 
-public class MainMenuController : IUIController, IGameEventListener
+public class MainMenuController : IUIController
 {
     private MainMenuView _mainMenuView;
     private ResourcePool _resourcePool;
@@ -9,11 +10,9 @@ public class MainMenuController : IUIController, IGameEventListener
     private CardView _iron;
     private CardView _gold;
 
-    private EventSO _eventSO;
-
     public UISwitcher UISwitcher { get; set; }
 
-    public MainMenuController(MainMenuView menuView, ResourcePool resourcePool, UISwitcher uiSwitcher, EventSO eventSO)
+    public MainMenuController(MainMenuView menuView, ResourcePool resourcePool, UISwitcher uiSwitcher)
     {
         _mainMenuView = menuView;
         _resourcePool = resourcePool;
@@ -30,8 +29,7 @@ public class MainMenuController : IUIController, IGameEventListener
         _iron.MaterialName.text = _resourcePool.Iron.ToString();
         _gold.MaterialName.text = _resourcePool.Gold.ToString();
 
-        _eventSO = eventSO;
-        _eventSO.RegisterObserver(this);
+        Signals.Get<ResetSignal>().AddListener(Notify);
 
         SetText();
     }
@@ -58,7 +56,7 @@ public class MainMenuController : IUIController, IGameEventListener
 
     private void Reset()
     {
-        _eventSO.Notify();
+        Signals.Get<ResetSignal>().Dispatch();
     }
 
     private void SetText()

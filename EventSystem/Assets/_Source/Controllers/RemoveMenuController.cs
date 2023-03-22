@@ -1,3 +1,4 @@
+using deVoid.Utils;
 using System.Collections.Generic;
 
 public class RemoveMenuController : IUIController, IGameEventListener
@@ -5,11 +6,9 @@ public class RemoveMenuController : IUIController, IGameEventListener
     private RemoveMenuView _removeMenuView;
     private ResourcePool _resourcePool;
 
-    private EventSO _eventSO;
-
     public UISwitcher UISwitcher { get; set; }
 
-    public RemoveMenuController(RemoveMenuView removeMenuView, ResourcePool resourcePool, UISwitcher uiSwitcher, EventSO eventSO)
+    public RemoveMenuController(RemoveMenuView removeMenuView, ResourcePool resourcePool, UISwitcher uiSwitcher)
     {
         _removeMenuView = removeMenuView;
         _resourcePool = resourcePool;
@@ -18,8 +17,7 @@ public class RemoveMenuController : IUIController, IGameEventListener
         _removeMenuView.RemoveMenuButton.onClick.AddListener(ChangeState);
         _removeMenuView.RemoveButton.onClick.AddListener(Remove);
 
-        _eventSO = eventSO;
-        _eventSO.RegisterObserver(this);
+        Signals.Get<RemoveSignal>().AddListener(Notify);
 
         _removeMenuView.DropDown.AddOptions(new List<string> { _resourcePool.Wood.ToString(), _resourcePool.Iron.ToString(), _resourcePool.Gold.ToString()});
     }
@@ -49,7 +47,7 @@ public class RemoveMenuController : IUIController, IGameEventListener
 
     private void Remove()
     {
-        _eventSO.Notify();
+        Signals.Get<RemoveSignal>().Dispatch();
     }
 
     private void SetText()
