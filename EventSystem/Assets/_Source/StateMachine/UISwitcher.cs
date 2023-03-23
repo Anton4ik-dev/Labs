@@ -2,13 +2,11 @@ using System.Collections.Generic;
 
 public class UISwitcher
 {
-    public Dictionary<int, IUIController> states;
+    public Dictionary<int, IUIController> states = new Dictionary<int, IUIController>();
     private IUIController _activeState;
 
     public void Initialize(IUIController mainMenuState, IUIController addMenuState, IUIController removeMenuState)
     {
-        states = new Dictionary<int, IUIController>();
-
         states.Add(0, mainMenuState);
         states.Add(1, addMenuState);
         states.Add(2, removeMenuState);

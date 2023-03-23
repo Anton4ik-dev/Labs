@@ -37,12 +37,7 @@ public class RemoveMenuController : IUIController, IGameEventListener
 
     public void Notify()
     {
-        if (_removeMenuView.DropDown.value == 0)
-            _resourcePool.WoodAmount -= int.Parse(_removeMenuView.InputField.text);
-        else if (_removeMenuView.DropDown.value == 1)
-            _resourcePool.IronAmount -= int.Parse(_removeMenuView.InputField.text);
-        else if (_removeMenuView.DropDown.value == 2)
-            _resourcePool.GoldAmount -= int.Parse(_removeMenuView.InputField.text);
+        _resourcePool.Resources[_removeMenuView.DropDown.value] -= int.Parse(_removeMenuView.InputField.text);
 
         SetText();
     }

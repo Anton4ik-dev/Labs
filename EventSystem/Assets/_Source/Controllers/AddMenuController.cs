@@ -38,12 +38,7 @@ public class AddMenuController : IUIController, IGameEventListener
 
     public void Notify()
     {
-        if (_addMenuView.DropDown.value == 0)
-            _resourcePool.WoodAmount += int.Parse(_addMenuView.InputField.text);
-        else if (_addMenuView.DropDown.value == 1)
-            _resourcePool.IronAmount += int.Parse(_addMenuView.InputField.text);
-        else if (_addMenuView.DropDown.value == 2)
-            _resourcePool.GoldAmount += int.Parse(_addMenuView.InputField.text);
+        _resourcePool.Resources[_addMenuView.DropDown.value] += int.Parse(_addMenuView.InputField.text);
 
         SetText();
     }

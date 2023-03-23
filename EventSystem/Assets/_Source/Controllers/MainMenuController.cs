@@ -49,9 +49,9 @@ public class MainMenuController : IUIController, IGameEventListener
 
     public void Notify()
     {
-        _resourcePool.WoodAmount = 0;
-        _resourcePool.IronAmount = 0;
-        _resourcePool.GoldAmount = 0;
+        _resourcePool.Resources[0] = 0;
+        _resourcePool.Resources[1] = 0;
+        _resourcePool.Resources[2] = 0;
 
         SetText();
     }
@@ -63,9 +63,9 @@ public class MainMenuController : IUIController, IGameEventListener
 
     private void SetText()
     {
-        _wood.MaterialAmount.text = _resourcePool.WoodAmount.ToString();
-        _iron.MaterialAmount.text = _resourcePool.IronAmount.ToString();
-        _gold.MaterialAmount.text = _resourcePool.GoldAmount.ToString();
+        _wood.MaterialAmount.text = _resourcePool.Resources[0].ToString();
+        _iron.MaterialAmount.text = _resourcePool.Resources[1].ToString();
+        _gold.MaterialAmount.text = _resourcePool.Resources[2].ToString();
     }
 
     private void ChangeState()
