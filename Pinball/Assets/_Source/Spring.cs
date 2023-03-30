@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class Spring : MonoBehaviour
 {
-    [SerializeField] private Rigidbody ballRb;
     [SerializeField] private float strengthMax;
     [SerializeField] private float strengthPlus;
 
-    private bool isTouching;
     private float _totalStrength;
+    private Rigidbody ballRb;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ball"))
-            isTouching = true;
+        if (collision.gameObject.CompareTag("Ball"))
+            ballRb = collision.gameObject.GetComponent<Rigidbody>();
     }
 
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
-            isTouching = false;
+            ballRb = null;
     }
 
     public void AddStrength()
@@ -29,9 +28,5 @@ public class Spring : MonoBehaviour
             _totalStrength += strengthPlus;
     }
 
-    public void Release()
-    {
-        if (isTouching)
-            ballRb.AddForce(0, _totalStrength, 0, ForceMode.Impulse);
-    }
+    public void Release() => ballRb?.AddForce(0, _totalStrength, 0, ForceMode.Impulse);
 }
