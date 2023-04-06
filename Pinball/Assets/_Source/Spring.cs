@@ -24,9 +24,13 @@ public class Spring : MonoBehaviour
 
     public void AddStrength()
     {
-        if(_totalStrength < strengthMax)
+        if (_totalStrength < strengthMax)
             _totalStrength += strengthPlus;
     }
 
-    public void Release() => ballRb?.AddForce(0, _totalStrength, 0, ForceMode.Impulse);
+    public void Release()
+    {
+        ballRb?.AddForce(0, _totalStrength, 0, ForceMode.Impulse);
+        _totalStrength = 0;
+    }
 }

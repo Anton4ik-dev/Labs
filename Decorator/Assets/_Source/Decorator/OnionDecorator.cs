@@ -2,6 +2,7 @@ namespace Decorator
 {
     public class OnionDecorator : HotDogDecorator
     {
+        // конструктор
         public OnionDecorator(string name, int cost, int weight, ABaseHotDog hotdog) : base(name, cost, weight, hotdog)
         {
 

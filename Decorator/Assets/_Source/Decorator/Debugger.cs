@@ -3,6 +3,7 @@ using Decorator;
 
 public class Debugger : MonoBehaviour
 {
+    // сериализованные поля, если одно из них не будет заполнено, то все сломается
     [SerializeField] private HotDogSO classicHotDogSO;
     [SerializeField] private HotDogSO cesarHotDogSO;
     [SerializeField] private HotDogSO meatHotDogSO;

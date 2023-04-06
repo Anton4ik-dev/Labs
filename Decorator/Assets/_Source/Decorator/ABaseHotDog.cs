@@ -5,7 +5,8 @@ namespace Decorator
         public string Name { get; protected set; }
         public int Cost { get; protected set; }
         public int Weight { get; protected set; }
-
+        
+        // конструктор
         public ABaseHotDog(string name, int cost, int weight)
         {
             Name = name;
@@ -14,7 +15,7 @@ namespace Decorator
         }
 
         public string GetName() => Name;
-        public abstract int GetCost();
-        public abstract int GetWeight();
+        public virtual int GetCost() => Cost;
+        public virtual int GetWeight() => Weight;
     }
 }

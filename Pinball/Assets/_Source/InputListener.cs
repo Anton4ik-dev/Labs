@@ -9,10 +9,10 @@ public class InputListener : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
-            _leftFipperRb.AddForce(150, 0, 0, ForceMode.Impulse);
+            _leftFipperRb.AddForce(100, 0, 0, ForceMode.Impulse);
 
         if (Input.GetKeyDown(KeyCode.X))
-            _rightFipperRb.AddForce(-150, 0, 0, ForceMode.Impulse);
+            _rightFipperRb.AddForce(-100, 0, 0, ForceMode.Impulse);
 
         if (Input.GetKey(KeyCode.Space))
             _spring.AddStrength();

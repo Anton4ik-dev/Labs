@@ -4,6 +4,7 @@ namespace Decorator
     {
         public ABaseHotDog HotDog { get; protected set; }
 
+        // конструктор
         public HotDogDecorator(string name, int cost, int weight, ABaseHotDog hotdog) : base(name, cost, weight)
         {
             HotDog = hotdog;
