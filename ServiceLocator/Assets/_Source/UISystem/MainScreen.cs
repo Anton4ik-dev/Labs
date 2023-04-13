@@ -10,10 +10,10 @@ namespace UISystem
         private UISwitcher _uiSwitcher;
         private MainScreenView _mainScreenView;
 
-        public MainScreen(IFadeService fadeService, ISoundPlayer soundPlayer, UISwitcher uiSwitcher, MainScreenView mainScreenView)
+        public MainScreen(IServiceLocator locator, UISwitcher uiSwitcher, MainScreenView mainScreenView)
         {
-            _fadeService = fadeService;
-            _soundPlayer = soundPlayer;
+            _fadeService = locator.GetService<IFadeService>();
+            _soundPlayer = locator.GetService<ISoundPlayer>();
             _uiSwitcher = uiSwitcher;
             _mainScreenView = mainScreenView;
         }

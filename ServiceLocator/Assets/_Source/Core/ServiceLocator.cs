@@ -21,16 +21,12 @@ namespace Core
             };
         }
 
-        public bool GetService<T>(out T service)
+        public T GetService<T>()
         {
-            service = default;
             if(_services.ContainsKey(typeof(T)))
-            {
-                service = (T)_services[typeof(T)];
-                return true;
-            }
+                return (T)_services[typeof(T)];
 
-            return false;
+            throw new Exception("NoService");
         }
     }
 }

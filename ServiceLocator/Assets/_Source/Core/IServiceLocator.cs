@@ -2,6 +2,6 @@
 {
     public interface IServiceLocator
     {
-        bool GetService<T>(out T service);
+        T GetService<T>();
     }
 }
