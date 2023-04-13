@@ -2,6 +2,8 @@
 {
     public interface IServiceLocator
     {
-        T GetService<T>();
+        bool GetService<T>(out T service);
+        void RegisterService<T>(IGameService service);
+        void DeleteService<T>();
     }
 }

@@ -1,5 +1,4 @@
 using Core;
-using DG.Tweening;
 using SaveSystem;
 
 namespace UISystem
@@ -15,9 +14,12 @@ namespace UISystem
 
         public AdditionalScreen(IServiceLocator locator, UISwitcher uiSwitcher, AdditionalScreenView additionalScreenView, Score score)
         {
-            _fadeService = locator.GetService<IFadeService>();
-            _soundPlayer = locator.GetService<ISoundPlayer>();
-            _saveService = locator.GetService<ISaver>();
+            locator.GetService(out IFadeService fadeService);
+            locator.GetService(out ISoundPlayer soundService);
+            locator.GetService(out ISaver saveService);
+            _fadeService = fadeService;
+            _soundPlayer = soundService;
+            _saveService = saveService;
             _uiSwitcher = uiSwitcher;
             _additionalScreenView = additionalScreenView;
             _score = score;
@@ -36,18 +38,14 @@ namespace UISystem
 
         public void Enter()
         {
-            _additionalScreenView.Bind(ChangeState, ChangeScore);
-            Tween tween = _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration);
-            tween.Play().OnStart(() => _additionalScreenView.ClosePanel.gameObject.SetActive(true));
+            _additionalScreenView.Bind(ChangeState, ChangeScore, _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _soundPlayer.PlayOpenSound();
         }
 
         public void Exit()
         {
-            _additionalScreenView.Expose();
+            _additionalScreenView.Expose(_fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _saveService.SaveScore(_score.ScoreAmount);
-            Tween tween = _fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration);
-            tween.Play().OnComplete(() => _additionalScreenView.ClosePanel.gameObject.SetActive(false));
             _soundPlayer.PlayExitSound();
         }
     }

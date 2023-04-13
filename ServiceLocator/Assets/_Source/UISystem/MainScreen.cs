@@ -1,5 +1,4 @@
 using Core;
-using DG.Tweening;
 
 namespace UISystem
 {
@@ -12,8 +11,10 @@ namespace UISystem
 
         public MainScreen(IServiceLocator locator, UISwitcher uiSwitcher, MainScreenView mainScreenView)
         {
-            _fadeService = locator.GetService<IFadeService>();
-            _soundPlayer = locator.GetService<ISoundPlayer>();
+            locator.GetService(out IFadeService fadeService);
+            locator.GetService(out ISoundPlayer soundService);
+            _fadeService = fadeService;
+            _soundPlayer = soundService;
             _uiSwitcher = uiSwitcher;
             _mainScreenView = mainScreenView;
         }
@@ -25,17 +26,13 @@ namespace UISystem
 
         public void Enter()
         {
-            _mainScreenView.Bind(ChangeState);
-            Tween tween = _fadeService.FadeIn(_mainScreenView.OpenPanel, _mainScreenView.Duration);
-            tween.Play().OnStart(() => _mainScreenView.OpenPanel.gameObject.SetActive(true));
+            _mainScreenView.Bind(ChangeState, _fadeService.FadeIn(_mainScreenView.OpenPanel, _mainScreenView.Duration));
             _soundPlayer.PlayOpenSound();
         }
 
         public void Exit()
         {
-            _mainScreenView.Expose();
-            Tween tween = _fadeService.FadeOut(_mainScreenView.OpenPanel, _mainScreenView.Duration);
-            tween.Play().OnComplete(() => _mainScreenView.OpenPanel.gameObject.SetActive(false));
+            _mainScreenView.Expose(_fadeService.FadeOut(_mainScreenView.OpenPanel, _mainScreenView.Duration));
             _soundPlayer.PlayExitSound();
         }
     }

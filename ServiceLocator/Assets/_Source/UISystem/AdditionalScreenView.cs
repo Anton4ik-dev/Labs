@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,16 +16,18 @@ namespace UISystem
         public Image ClosePanel { get => closePanel; }
         public float Duration { get => duration; }
 
-        public void Bind(Action changeState, Action changeScore)
+        public void Bind(Action changeState, Action changeScore, Tween tween)
         {
             closeButton.onClick.AddListener(() => changeState?.Invoke());
             scoreButton.onClick.AddListener(() => changeScore?.Invoke());
+            tween.Play().OnStart(() => closePanel.gameObject.SetActive(true));
         }
 
-        public void Expose()
+        public void Expose(Tween tween)
         {
             closeButton.onClick.RemoveAllListeners();
             scoreButton.onClick.RemoveAllListeners();
+            tween.Play().OnComplete(() => closePanel.gameObject.SetActive(false));
         }
 
         public void UpdateScoreText(int score)

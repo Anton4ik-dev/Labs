@@ -21,12 +21,26 @@ namespace Core
             };
         }
 
-        public T GetService<T>()
+        public void RegisterService<T>(IGameService service)
         {
-            if(_services.ContainsKey(typeof(T)))
-                return (T)_services[typeof(T)];
+            _services.Add(typeof(T), service);
+        }
 
-            throw new Exception("NoService");
+        public void DeleteService<T>()
+        {
+            _services.Remove(typeof(T));
+        }
+
+        public bool GetService<T>(out T service)
+        {
+            service = default;
+            if(_services.ContainsKey(typeof(T)))
+            {
+                service = (T)_services[typeof(T)];
+                return true;
+            }
+
+            return false;
         }
     }
 }
