@@ -38,13 +38,13 @@ namespace UISystem
 
         public void Enter()
         {
-            _additionalScreenView.Bind(ChangeState, ChangeScore, _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
+            _additionalScreenView.Show(ChangeState, ChangeScore, _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _soundPlayer.PlayOpenSound();
         }
 
         public void Exit()
         {
-            _additionalScreenView.Expose(_fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
+            _additionalScreenView.Hide(_fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _saveService.SaveScore(_score.ScoreAmount);
             _soundPlayer.PlayExitSound();
         }

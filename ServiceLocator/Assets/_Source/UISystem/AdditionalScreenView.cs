@@ -16,14 +16,14 @@ namespace UISystem
         public Image ClosePanel { get => closePanel; }
         public float Duration { get => duration; }
 
-        public void Bind(Action changeState, Action changeScore, Tween tween)
+        public void Show(Action changeState, Action changeScore, Tween tween)
         {
             closeButton.onClick.AddListener(() => changeState?.Invoke());
             scoreButton.onClick.AddListener(() => changeScore?.Invoke());
             tween.Play().OnStart(() => closePanel.gameObject.SetActive(true));
         }
 
-        public void Expose(Tween tween)
+        public void Hide(Tween tween)
         {
             closeButton.onClick.RemoveAllListeners();
             scoreButton.onClick.RemoveAllListeners();

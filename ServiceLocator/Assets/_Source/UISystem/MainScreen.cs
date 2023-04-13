@@ -26,13 +26,13 @@ namespace UISystem
 
         public void Enter()
         {
-            _mainScreenView.Bind(ChangeState, _fadeService.FadeIn(_mainScreenView.OpenPanel, _mainScreenView.Duration));
+            _mainScreenView.Show(ChangeState, _fadeService.FadeIn(_mainScreenView.OpenPanel, _mainScreenView.Duration));
             _soundPlayer.PlayOpenSound();
         }
 
         public void Exit()
         {
-            _mainScreenView.Expose(_fadeService.FadeOut(_mainScreenView.OpenPanel, _mainScreenView.Duration));
+            _mainScreenView.Hide(_fadeService.FadeOut(_mainScreenView.OpenPanel, _mainScreenView.Duration));
             _soundPlayer.PlayExitSound();
         }
     }

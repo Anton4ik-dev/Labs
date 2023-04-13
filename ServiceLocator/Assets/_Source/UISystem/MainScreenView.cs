@@ -14,13 +14,13 @@ namespace UISystem
         public Image OpenPanel { get => openPanel; }
         public float Duration { get => duration; }
 
-        public void Bind(Action changeState, Tween tween)
+        public void Show(Action changeState, Tween tween)
         {
             openButton.onClick.AddListener(() => changeState?.Invoke());
             tween.Play().OnStart(() => openPanel.gameObject.SetActive(true));
         }
 
-        public void Expose(Tween tween)
+        public void Hide(Tween tween)
         {
             openButton.onClick.RemoveAllListeners();
             tween.Play().OnComplete(() => openPanel.gameObject.SetActive(false));

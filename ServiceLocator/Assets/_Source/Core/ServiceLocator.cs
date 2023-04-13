@@ -23,12 +23,14 @@ namespace Core
 
         public void RegisterService<T>(IGameService service)
         {
-            _services.Add(typeof(T), service);
+            if(!_services.ContainsKey(typeof(T)))
+                _services.Add(typeof(T), service);
         }
 
         public void DeleteService<T>()
         {
-            _services.Remove(typeof(T));
+            if(_services.ContainsKey(typeof(T)))
+                _services.Remove(typeof(T));
         }
 
         public bool GetService<T>(out T service)
