@@ -9,13 +9,15 @@ namespace UISystem
         private ISoundPlayer _soundPlayer;
         private UISwitcher _uiSwitcher;
         private AdditionalScreenView _additionalScreenView;
+        private Score _score;
 
-        public AdditionalScreen(IFadeService fadeService, ISoundPlayer soundPlayer, UISwitcher uiSwitcher, AdditionalScreenView additionalScreenView)
+        public AdditionalScreen(IFadeService fadeService, ISoundPlayer soundPlayer, UISwitcher uiSwitcher, AdditionalScreenView additionalScreenView, Score score)
         {
             _fadeService = fadeService;
             _soundPlayer = soundPlayer;
             _uiSwitcher = uiSwitcher;
             _additionalScreenView = additionalScreenView;
+            _score = score;
         }
 
         private void ChangeState()
@@ -25,7 +27,7 @@ namespace UISystem
 
         public void Enter()
         {
-            _additionalScreenView.Bind(ChangeState);
+            _additionalScreenView.Bind(ChangeState, _score.ChangeScore);
             Tween tween = _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration);
             tween.Play().OnStart(() => _additionalScreenView.ClosePanel.gameObject.SetActive(true));
             _soundPlayer.PlayOpenSound();
@@ -34,6 +36,7 @@ namespace UISystem
         public void Exit()
         {
             _additionalScreenView.Expose();
+            _score.SaveScore();
             Tween tween = _fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration);
             tween.Play().OnComplete(() => _additionalScreenView.ClosePanel.gameObject.SetActive(false));
             _soundPlayer.PlayExitSound();

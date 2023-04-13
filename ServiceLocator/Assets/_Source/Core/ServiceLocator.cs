@@ -1,3 +1,4 @@
+using SaveSystem;
 using System;
 using System.Collections.Generic;
 using UISystem;
@@ -14,7 +15,9 @@ namespace Core
             _services = new Dictionary<Type, IGameService>
             {
                 { typeof(IFadeService), new FadeService() },
-                { typeof(ISoundPlayer), new SoundPlayer(openSound, exitSound) }
+                { typeof(ISoundPlayer), new SoundPlayer(openSound, exitSound) },
+                //{ typeof(ISaver), new PlayerPrefsSaver() }
+                { typeof(ISaver), new JsonSaver() }
             };
         }
 
