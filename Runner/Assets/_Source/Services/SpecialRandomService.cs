@@ -8,22 +8,22 @@ namespace Service
     {
         private TileSO _lastTile;
 
-        public Tile GetRandomElement(List<TileSO> tileSOs)
+        public TileSO GetRandomSO(List<TileSO> tileSOs)
         {
             if (_lastTile == null)
             {
                 _lastTile = tileSOs[Random.Range(0, tileSOs.Count)];
-                return _lastTile.TilePrefab;
+                return _lastTile;
             }
 
             _lastTile = _lastTile.ConnectedTiles[Random.Range(0, _lastTile.ConnectedTiles.Count)];
-            return _lastTile.TilePrefab;
+            return _lastTile;
         }
 
-        public Tile GetRandomElement()
+        public TileSO GetRandomSO()
         {
             _lastTile = _lastTile.ConnectedTiles[Random.Range(0, _lastTile.ConnectedTiles.Count)];
-            return _lastTile.TilePrefab;
+            return _lastTile;
         }
     }
 }

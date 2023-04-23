@@ -15,6 +15,5 @@ MonoBehaviour:
   connectedTiles:
   - {fileID: 11400000, guid: 23b17f8483a78aa4ca10ff060462e49e, type: 2}
   - {fileID: 11400000, guid: 842b031f0aa65ff4fa05d568cd904bd9, type: 2}
-  - {fileID: 11400000}
   priority: 2
   tilePrefab: {fileID: -8345086135772955458, guid: f77567426be2df54a8bd2bd9dc072e57, type: 3}

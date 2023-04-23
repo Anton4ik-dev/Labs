@@ -6,7 +6,7 @@ namespace Service
 {
     public interface ISpecialRandomService : IGameService
     {
-        Tile GetRandomElement(List<TileSO> prefabs);
-        Tile GetRandomElement();
+        TileSO GetRandomSO(List<TileSO> prefabs);
+        TileSO GetRandomSO();
     }
 }

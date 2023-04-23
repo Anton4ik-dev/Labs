@@ -10,7 +10,7 @@ namespace Core
     {
         [SerializeField] private List<Tile> tiles;
         [SerializeField] private List<TileSO> tilesSO;
-        [SerializeField] private float road;
+        [SerializeField] private GameObject road;
         [SerializeField] private Transform startPosition;
         [SerializeField] private bool autoExpand;
         [SerializeField] private int count;
@@ -20,8 +20,8 @@ namespace Core
         {
             ServiceLocator serviceLocator = new ServiceLocator();
 
-            //character.Construct(new TilePool<Tile>(tiles, road, autoExpand, startPosition.position, count, serviceLocator), serviceLocator);
-            character.Construct(new TileSOPool(tilesSO, road, autoExpand, startPosition.position, count, serviceLocator), serviceLocator);
+            //character.Construct(new TilePool<Tile>(tiles, road.transform.localScale.z, autoExpand, startPosition.position, count, serviceLocator), serviceLocator);
+            character.Construct(new TileSOPool(tilesSO, road.transform.localScale.z, autoExpand, startPosition.position, count, serviceLocator), serviceLocator);
         }
     }
 }

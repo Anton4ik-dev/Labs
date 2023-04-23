@@ -428,6 +428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighMoving (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5883143766742407774, guid: f57db8d0ea9024743ba9c1f91e25f93f, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 6730756241155126995}
     - target: {fileID: 7976083222261899525, guid: f57db8d0ea9024743ba9c1f91e25f93f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -490,6 +494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighMoving
       objectReference: {fileID: 0}
+    - target: {fileID: 5883143766742407774, guid: f57db8d0ea9024743ba9c1f91e25f93f, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 6730756241155126995}
     - target: {fileID: 7976083222261899525, guid: f57db8d0ea9024743ba9c1f91e25f93f, type: 3}
       propertyPath: m_RootOrder
       value: 4

@@ -164,10 +164,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d531f1712fc9d846bdce16c921fc209, type: 2}
   - {fileID: 11400000, guid: 23b17f8483a78aa4ca10ff060462e49e, type: 2}
   - {fileID: 11400000, guid: 842b031f0aa65ff4fa05d568cd904bd9, type: 2}
-  road: 4.7669
+  road: {fileID: 1235170876042495805, guid: bc91de1e50d12154185340c5ac3948f5, type: 3}
   startPosition: {fileID: 398843225}
   autoExpand: 1
-  count: 5
+  count: 2
   character: {fileID: 963194229}
 --- !u!4 &78156588
 Transform:
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4c222614ad9304fa7aa5340346d8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
+  speed: 0.007
   triggerLayer:
     serializedVersion: 2
     m_Bits: 8
