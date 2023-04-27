@@ -1,33 +1,29 @@
-using Core;
 using SaveSystem;
+using Zenject;
 
 namespace UISystem
 {
-    public class AdditionalScreen : IUIState
+    public class AdditionalScreen : AUIState
     {
         private IFadeService _fadeService;
         private ISoundPlayer _soundPlayer;
         private ISaver _saveService;
-        private UISwitcher _uiSwitcher;
         private AdditionalScreenView _additionalScreenView;
         private Score _score;
 
-        public AdditionalScreen(IServiceLocator locator, UISwitcher uiSwitcher, AdditionalScreenView additionalScreenView, Score score)
+        [Inject]
+        public AdditionalScreen(AdditionalScreenView additionalScreenView, Score score, IFadeService fadeService, ISoundPlayer soundService, ISaver saveService)
         {
-            locator.GetService(out IFadeService fadeService);
-            locator.GetService(out ISoundPlayer soundService);
-            locator.GetService(out ISaver saveService);
             _fadeService = fadeService;
             _soundPlayer = soundService;
             _saveService = saveService;
-            _uiSwitcher = uiSwitcher;
             _additionalScreenView = additionalScreenView;
             _score = score;
         }
 
         private void ChangeState()
         {
-            _uiSwitcher.ChangeState(_uiSwitcher.states[typeof(MainScreen)]);
+            Owner.ChangeState(Owner.States[typeof(MainScreen)]);
         }
 
         private void ChangeScore()
@@ -36,13 +32,13 @@ namespace UISystem
             _additionalScreenView.UpdateScoreText(_score.ScoreAmount);
         }
 
-        public void Enter()
+        public override void Enter()
         {
             _additionalScreenView.Show(ChangeState, ChangeScore, _fadeService.FadeIn(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _soundPlayer.PlayOpenSound();
         }
 
-        public void Exit()
+        public override void Exit()
         {
             _additionalScreenView.Hide(_fadeService.FadeOut(_additionalScreenView.ClosePanel, _additionalScreenView.Duration));
             _saveService.SaveScore(_score.ScoreAmount);

@@ -1,9 +1,8 @@
-using Core;
 using UnityEngine;
 
 namespace SaveSystem
 {
-    public class PlayerPrefsSaver : ISaver, IGameService
+    public class PlayerPrefsSaver : ISaver
     {
         private const string SCORE_KEY = "Score";
 

@@ -1,8 +1,15 @@
 ﻿namespace UISystem
 {
-    public interface IUIState
+    public abstract class AUIState
     {
-        void Enter();
-        void Exit();
+        protected IUISwitcher Owner;
+
+        public void SetOwner(IUISwitcher owner)
+        {
+            Owner = owner;
+        }
+
+        public virtual void Enter() { }
+        public virtual void Exit() { }
     }
 }

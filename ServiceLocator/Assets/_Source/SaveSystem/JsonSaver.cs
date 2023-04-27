@@ -1,10 +1,9 @@
-using Core;
 using System.IO;
 using UnityEngine;
 
 namespace SaveSystem
 {
-    public class JsonSaver : ISaver, IGameService
+    public class JsonSaver : ISaver
     {
         private const string SAVE_PATH = "/ScoreData.json";
 

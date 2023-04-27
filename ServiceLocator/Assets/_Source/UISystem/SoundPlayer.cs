@@ -1,14 +1,15 @@
-using Core;
 using UnityEngine;
+using Zenject;
 
 namespace UISystem
 {
-    public class SoundPlayer : ISoundPlayer, IGameService
+    public class SoundPlayer : ISoundPlayer
     {
         private AudioSource _openSound;
         private AudioSource _exitSound;
 
-        public SoundPlayer(AudioSource openSound, AudioSource exitSound)
+        [Inject]
+        public SoundPlayer([Inject(Id = BindId.MAIN_STATE)] AudioSource openSound, [Inject(Id = BindId.ADD_STATE)] AudioSource exitSound)
         {
             _openSound = openSound;
             _exitSound = exitSound;

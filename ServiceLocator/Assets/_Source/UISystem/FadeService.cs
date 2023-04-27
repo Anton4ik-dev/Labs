@@ -1,10 +1,9 @@
-using Core;
 using DG.Tweening;
 using UnityEngine.UI;
 
 namespace UISystem
 {
-    public class FadeService : IFadeService, IGameService
+    public class FadeService : IFadeService
     {
         private const float _maxDuration = 1;
         private const float _minDuration = 0;

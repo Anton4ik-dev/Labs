@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
 namespace UISystem
 {
-    public class UISwitcher
+    public class UISwitcher : IUISwitcher
     {
-        public Dictionary<Type, IUIState> states;
-        private IUIState _activeState;
+        public Dictionary<Type, AUIState> States { get; set; }
+        private AUIState _activeState;
 
-        public void Construct(IUIState mainMenuState, IUIState additionalMenuState)
+        [Inject]
+        public UISwitcher([Inject(Id = BindId.MAIN_STATE)] AUIState mainMenuState, [Inject(Id = BindId.ADD_STATE)] AUIState additionalMenuState)
         {
-            states = new Dictionary<Type, IUIState>();
+            States = new Dictionary<Type, AUIState>();
 
-            states.Add(typeof(MainScreen), mainMenuState);
-            states.Add(typeof(AdditionalScreen), additionalMenuState);
+            States.Add(typeof(MainScreen), mainMenuState);
+            States.Add(typeof(AdditionalScreen), additionalMenuState);
+
+            foreach (var state in States)
+                state.Value.SetOwner(this);
         }
 
         private void ExitState()
@@ -22,13 +26,13 @@ namespace UISystem
             _activeState?.Exit();
         }
 
-        private void EnterState(IUIState newState)
+        private void EnterState(AUIState newState)
         {
             _activeState = newState;
             _activeState.Enter();
         }
 
-        public void ChangeState(IUIState newState)
+        public void ChangeState(AUIState newState)
         {
             ExitState();
             EnterState(newState);
