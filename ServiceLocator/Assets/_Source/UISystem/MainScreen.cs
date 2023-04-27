@@ -1,4 +1,4 @@
-using Core;
+using Zenject;
 
 namespace UISystem
 {
@@ -9,10 +9,9 @@ namespace UISystem
         private UISwitcher _uiSwitcher;
         private MainScreenView _mainScreenView;
 
-        public MainScreen(IServiceLocator locator, UISwitcher uiSwitcher, MainScreenView mainScreenView)
+        [Inject]
+        public MainScreen(UISwitcher uiSwitcher, MainScreenView mainScreenView, IFadeService fadeService, ISoundPlayer soundService)
         {
-            locator.GetService(out IFadeService fadeService);
-            locator.GetService(out ISoundPlayer soundService);
             _fadeService = fadeService;
             _soundPlayer = soundService;
             _uiSwitcher = uiSwitcher;
