@@ -28,6 +28,7 @@ namespace Core
         [SerializeField] private GameObject bullet;
         [SerializeField] private bool autoExpandForBullet;
         [SerializeField] private Transform startPositionForBullet;
+        [SerializeField] private Transform aim;
         [SerializeField] private int countForBullet;
 
         public override void InstallBindings()
@@ -53,6 +54,7 @@ namespace Core
             Container.Bind<int>().WithId(BindId.BULLET_ID).FromInstance(countForBullet).AsCached();
 
             Container.Bind<Transform>().WithId(BindId.COUNT_ID).FromInstance(character.transform).AsCached();
+            Container.Bind<Transform>().WithId(BindId.TILE_ID).FromInstance(aim).AsCached();
             Container.Bind<float>().WithId(BindId.SPEED_ID).FromInstance(speed).AsCached();
             Container.Bind<float>().WithId(BindId.JUMP_ID).FromInstance(jumpForce).AsCached();
 

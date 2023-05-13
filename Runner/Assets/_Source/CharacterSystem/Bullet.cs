@@ -1,31 +1,25 @@
-﻿using Service;
+﻿using Core;
+using Service;
 using System.Collections;
 using UnityEngine;
 using Zenject;
 
 namespace CharacterSystem
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private float speed;
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private float lifeTime;
         [SerializeField] private AudioClip shootClip;
         [SerializeField] private AudioClip inClip;
 
         [Inject]
         private SoundService _soundService;
-
-        private void Awake()
-        {
-            if (rb == null)
-                rb = GetComponent<Rigidbody>();
-        }
+        private Transform _aim;
 
         private void Update()
         {
-            rb.velocity = transform.forward * speed;
+            transform.position = Vector3.MoveTowards(transform.position, _aim.position, speed * Time.deltaTime);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -35,9 +29,10 @@ namespace CharacterSystem
         }
 
         [Inject]
-        public void Construct(SoundService soundService)
+        public void Construct(SoundService soundService, [Inject(Id = BindId.TILE_ID)] Transform aim)
         {
             _soundService = soundService;
+            _aim = aim;
         }
 
         public void TurnOn()
