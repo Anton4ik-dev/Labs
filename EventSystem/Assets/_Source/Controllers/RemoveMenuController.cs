@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RemoveMenuController : IUIController, IGameEventListener
 {
@@ -38,6 +39,9 @@ public class RemoveMenuController : IUIController, IGameEventListener
     public void Notify()
     {
         _resourcePool.Resources[_removeMenuView.DropDown.value] -= int.Parse(_removeMenuView.InputField.text);
+
+        if (_resourcePool.Resources[_removeMenuView.DropDown.value] < 0)
+            _resourcePool.Resources[_removeMenuView.DropDown.value] = 0;
 
         SetText();
     }

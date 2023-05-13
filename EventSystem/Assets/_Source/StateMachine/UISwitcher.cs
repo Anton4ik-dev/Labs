@@ -1,15 +1,16 @@
+using System;
 using System.Collections.Generic;
 
 public class UISwitcher
 {
-    public Dictionary<int, IUIController> states = new Dictionary<int, IUIController>();
+    public Dictionary<Type, IUIController> states = new Dictionary<Type, IUIController>();
     private IUIController _activeState;
 
     public void Initialize(IUIController mainMenuState, IUIController addMenuState, IUIController removeMenuState)
     {
-        states.Add(0, mainMenuState);
-        states.Add(1, addMenuState);
-        states.Add(2, removeMenuState);
+        states.Add(typeof(MainMenuController), mainMenuState);
+        states.Add(typeof(AddMenuController), addMenuState);
+        states.Add(typeof(RemoveMenuController), removeMenuState);
     }
 
     private void ExitState()
