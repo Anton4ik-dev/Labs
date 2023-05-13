@@ -4,8 +4,7 @@ namespace Template
 {
     public class Wizard : ABaseEnemy
     {
-        public override Animator Animator { get; set; }
-        public override int ID { get; set; }
+        private readonly int _id;
         private GameObject _bulletPrefab;
         private Transform _spawnpoint;
         private float _saveTime;
@@ -13,7 +12,7 @@ namespace Template
 
         public Wizard(Animator animator, string triigerName, GameObject bulletPrefab, Transform spawnPoint, float time)
         {
-            ID = Animator.StringToHash(triigerName);
+            _id = Animator.StringToHash(triigerName);
             Animator = animator;
             _bulletPrefab = bulletPrefab;
             _spawnpoint = spawnPoint;
@@ -24,7 +23,7 @@ namespace Template
         {
             if(_time <= 0)
             {
-                Animator.SetTrigger(ID);
+                Animator.SetTrigger(_id);
                 GameObject.Instantiate(_bulletPrefab, _spawnpoint.position, Quaternion.identity);
                 _time = _saveTime;
             }

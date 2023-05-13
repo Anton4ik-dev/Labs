@@ -4,16 +4,16 @@ namespace Strategy
 {
     public class AttackType2 : IAttackStrategy
     {
-        public int ID { get; set; }
+        private readonly int _id;
 
-        public AttackType2(string triigerName)
+        public AttackType2(string trigerName)
         {
-            ID = Animator.StringToHash(triigerName);
+            _id = Animator.StringToHash(trigerName);
         }
 
         public void DoAttack(Animator animator)
         {
-            animator.SetTrigger(ID);
+            animator.SetTrigger(_id);
         }
     }
 }

@@ -3,43 +3,38 @@ using Template;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bootstrapper : MonoBehaviour
+namespace Core
 {
-    [SerializeField] private Animator playerAnimator;
-    [SerializeField] private Animator skeletonAnimator;
-    [SerializeField] private Animator wizardAnimator;
-    [SerializeField] private Animator neonAnimator;
-
-    [SerializeField] private Button attackButtonType1;
-    [SerializeField] private Button attackButtonType2;
-    [SerializeField] private Button attackButtonType3;
-
-    [SerializeField] private Color highlightColor;
-
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float time;
-
-    private PlayerController _playerController;
-    private EnemyController _enemyController;
-
-    void Start()
+    public class Bootstrapper : MonoBehaviour
     {
-        _playerController = new PlayerController(playerAnimator);
-        _enemyController = new EnemyController(new Skeleton(skeletonAnimator, "Attack"), new Wizard(wizardAnimator, "Attack", bulletPrefab, spawnPoint, time), new Neon(neonAnimator, "Attack"));
+        [SerializeField] private InputListener inputListener;
 
-        new AttackTypeSwitcher(_playerController, _enemyController, highlightColor, attackButtonType1, attackButtonType2, attackButtonType3);
-    }
+        [SerializeField] private Animator playerAnimator;
+        [SerializeField] private Animator skeletonAnimator;
+        [SerializeField] private Animator wizardAnimator;
+        [SerializeField] private Animator neonAnimator;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
+        [SerializeField] private Button attackButtonType1;
+        [SerializeField] private Button attackButtonType2;
+        [SerializeField] private Button attackButtonType3;
+
+        [SerializeField] private Color highlightColor;
+
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private float time;
+
+        private PlayerController _playerController;
+        private EnemyController _enemyController;
+
+        void Start()
         {
-            _playerController.PerformAttack();
-            _enemyController.Neon.DoAttack();
+            _playerController = new PlayerController(playerAnimator);
+            _enemyController = new EnemyController(new Skeleton(skeletonAnimator, "Attack"),
+                new Wizard(wizardAnimator, "Attack", bulletPrefab, spawnPoint, time),
+                new Neon(neonAnimator, "Attack"));
+            inputListener.Construct(_playerController, _enemyController);
+            new AttackTypeSwitcher(_playerController, _enemyController, highlightColor, attackButtonType1, attackButtonType2, attackButtonType3);
         }
-
-        if(_enemyController.Wizard.Animator.gameObject.activeSelf)
-            _enemyController.Wizard.DoAttack();
     }
 }

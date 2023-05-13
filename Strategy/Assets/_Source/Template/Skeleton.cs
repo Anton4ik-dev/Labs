@@ -4,12 +4,11 @@ namespace Template
 {
     public class Skeleton : ABaseEnemy
     {
-        public override Animator Animator { get; set; }
-        public override int ID { get; set; }
+        private readonly int _id;
 
         public Skeleton(Animator animator, string triigerName)
         {
-            ID = Animator.StringToHash(triigerName);
+            _id = Animator.StringToHash(triigerName);
             Animator = animator;
         }
 

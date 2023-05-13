@@ -4,8 +4,7 @@ namespace Template
 {
     public abstract class ABaseEnemy
     {
-        public abstract Animator Animator { get; set; }
-        public abstract int ID { get; set; }
+        public Animator Animator { get; protected set; }
         public abstract void DoAttack();
     }
 }
