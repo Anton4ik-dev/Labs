@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using TileSystem;
 using UnityEngine;
+using Zenject;
 
 namespace Pool
 {
@@ -13,26 +14,24 @@ namespace Pool
         private float _roadLength;
         private bool _autoExpand;
         private Vector3 _distance;
-        private ISpecialRandomService _randomService;
+        private SpecialRandomService _randomService;
         
-        private Dictionary<int, List<Tile>> _poolSO;
+        private Dictionary<int, List<GameObject>> _poolSO;
 
-        public TileSOPool(List<TileSO> prefabs, float roadLength, bool autoExpand, Vector3 startPosition, int count, ServiceLocator serviceLocator)
+        public TileSOPool(List<TileSO> prefabs, [Inject(Id = BindId.COUNT_ID)] float roadLength, [Inject(Id = BindId.TILE_ID)] bool autoExpand, Vector3 startPosition, [Inject(Id = BindId.TILE_ID)] int count, SpecialRandomService randomService)
         {
             _prefabs = prefabs;
             _roadLength = roadLength;
             _autoExpand = autoExpand;
             _distance = startPosition;
-
-            serviceLocator.GetService(out ISpecialRandomService randomService);
             _randomService = randomService;
 
             CreatePool(count);
         }
 
-        public Tile GetFreeElement()
+        public GameObject GetFreeElement()
         {
-            if (HasFreeElement(out Tile element))
+            if (HasFreeElement(out GameObject element))
                 return element;
 
             throw new Exception("No free elements");
@@ -40,13 +39,13 @@ namespace Pool
 
         private void CreatePool(int count)
         {
-            _poolSO = new Dictionary<int, List<Tile>>();
+            _poolSO = new Dictionary<int, List<GameObject>>();
 
             for (int i = 0; i < count; i++)
                 CreateObject(true);
         }
 
-        private Tile CreateObject(bool isActiveByDefault = false, TileSO tileSO = null)
+        private GameObject CreateObject(bool isActiveByDefault = false, TileSO tileSO = null)
         {
             if(isActiveByDefault)
                 _distance.z += _roadLength;
@@ -55,18 +54,18 @@ namespace Pool
                 tileSO = _randomService.GetRandomSO(_prefabs);
 
             int tileSOID = tileSO.GetInstanceID();
-            Tile createdObject = GameObject.Instantiate(tileSO.TilePrefab, _distance, new Quaternion());
+            GameObject createdObject = GameObject.Instantiate(tileSO.TilePrefab, _distance, new Quaternion());
             createdObject.gameObject.SetActive(isActiveByDefault);
 
             if (_poolSO.ContainsKey(tileSOID))
                 _poolSO[tileSOID].Add(createdObject);
             else
-                _poolSO.Add(tileSOID, new List<Tile> { createdObject });
+                _poolSO.Add(tileSOID, new List<GameObject> { createdObject });
 
             return createdObject;
         }
 
-        private bool HasFreeElement(out Tile element)
+        private bool HasFreeElement(out GameObject element)
         {
             TileSO tileSO = _randomService.GetRandomSO();
             int randomSOID = tileSO.GetInstanceID();

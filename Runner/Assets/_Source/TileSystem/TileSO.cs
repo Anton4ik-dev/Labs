@@ -9,10 +9,10 @@ namespace TileSystem
 
         [SerializeField] private List<TileSO> connectedTiles;
         [SerializeField] private int priority;
-        [SerializeField] private Tile tilePrefab;
+        [SerializeField] private GameObject tilePrefab;
 
         public List<TileSO> ConnectedTiles { get => connectedTiles; }
         public int Priority { get => priority; }
-        public Tile TilePrefab { get => tilePrefab; }
+        public GameObject TilePrefab { get => tilePrefab; }
     }
 }

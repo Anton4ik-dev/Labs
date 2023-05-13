@@ -22,7 +22,7 @@ namespace TileSystem
         private void OnDisable()
         {
             Vector3 newVector = new Vector3(_startPos.x, _startPos.y, parentTransform.position.z);
-            transform.localPosition = newVector;
+            transform.position = newVector;
         }
     }
 }

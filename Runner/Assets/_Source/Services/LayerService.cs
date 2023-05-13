@@ -2,8 +2,8 @@
 
 namespace Service
 {
-    public class LayerService : ILayerService
+    public static class LayerService
     {
-        public bool CheckLayersEquality(LayerMask objectLayer, LayerMask requiredLayer) => ((1 << objectLayer) & requiredLayer) > 0;
+        public static bool CheckLayersEquality(LayerMask objectLayer, LayerMask requiredLayer) => ((1 << objectLayer) & requiredLayer) > 0;
     }
 }

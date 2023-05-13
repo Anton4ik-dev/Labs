@@ -17,4 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23b17f8483a78aa4ca10ff060462e49e, type: 2}
   - {fileID: 11400000, guid: 842b031f0aa65ff4fa05d568cd904bd9, type: 2}
   priority: 1
-  tilePrefab: {fileID: 2837946951916225186, guid: 399d5e7e3472ea84eb81adec0df460d8, type: 3}
+  tilePrefab: {fileID: 1185471443816529438, guid: 399d5e7e3472ea84eb81adec0df460d8, type: 3}

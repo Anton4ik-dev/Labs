@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6730756240289659117}
   - component: {fileID: 6730756240289659118}
   - component: {fileID: 6730756240289659119}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Road (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6730756240960976025}
   - component: {fileID: 6730756240960976026}
   - component: {fileID: 6730756240960976027}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Road (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,9 +203,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6730756241155126995}
-  - component: {fileID: 137825559320182141}
   - component: {fileID: -6254355381022424052}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: TileVariant5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,18 +232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &137825559320182141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6730756241155127596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 222a7a372f7b83b408911dcd7413ca2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &-6254355381022424052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,7 +257,7 @@ GameObject:
   - component: {fileID: 6730756241159121896}
   - component: {fileID: 6730756241159121897}
   - component: {fileID: 6730756241159121898}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}

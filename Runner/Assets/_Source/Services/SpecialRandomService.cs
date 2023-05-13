@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Service
 {
-    public class SpecialRandomService : ISpecialRandomService
+    public class SpecialRandomService
     {
         private TileSO _lastTile;
 
